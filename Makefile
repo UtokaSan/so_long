@@ -12,8 +12,8 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Iinclude -g
-LDFLAGS = -Llib/libft -Llib/ft_printf
-LDLIBS = -lft -lftprintf
+LDFLAGS = -Llib/libft -Llib/ft_printf -Llib/get_next_line
+LDLIBS = -lft -lftprintf -lgnl
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -22,6 +22,7 @@ LIB_DIR = lib
 
 LIBFT_DIR = $(LIB_DIR)/libft
 FT_PRINTF_DIR = $(LIB_DIR)/ft_printf
+GET_NEXT_LINE_DIR = $(LIB_DIR)/get_next_line
 
 SRC_FILES = $(shell find $(SRC_DIR) -name '*.c')
 
@@ -41,10 +42,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 libs:
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(FT_PRINTF_DIR)
+	@$(MAKE) -C $(GET_NEXT_LINE_DIR) 
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@$(MAKE) -C $(FT_PRINTF_DIR) clean
+	@$(MAKE) -C $(GET_NEXT_LINE_DIR) clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean

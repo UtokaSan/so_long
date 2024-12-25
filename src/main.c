@@ -6,14 +6,14 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:08:25 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/25 15:42:43 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/25 16:34:30 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
 int	main(void)
 {
-	ft_putstr_fd("Hello, World!\n", 1);
+	ft_printf("Hello, World!\n");
 	return (0);
 }
