@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude -g
-LDFLAGS = -Llib/libft -Llib/ft_printf -Llib/get_next_line
-LDLIBS = -lft -lftprintf -lgnl
+CFLAGS = -Wall -Wextra -Iinclude -g -Ilib/minilibx-linux
+LDFLAGS = -Llib/libft -Llib/ft_printf -Llib/get_next_line -Llib/minilibx-linux
+LDLIBS = -lft -lftprintf -lgnl -lmlx -lX11 -lXext
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -23,6 +23,7 @@ LIB_DIR = lib
 LIBFT_DIR = $(LIB_DIR)/libft
 FT_PRINTF_DIR = $(LIB_DIR)/ft_printf
 GET_NEXT_LINE_DIR = $(LIB_DIR)/get_next_line
+MINILIBX_DIR = $(LIB_DIR)/minilibx-linux
 
 SRC_FILES = $(shell find $(SRC_DIR) -name '*.c')
 
@@ -42,16 +43,20 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 libs:
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(FT_PRINTF_DIR)
-	@$(MAKE) -C $(GET_NEXT_LINE_DIR) 
+	@$(MAKE) -C $(GET_NEXT_LINE_DIR)
+	@$(MAKE) -C $(MINILIBX_DIR)
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@$(MAKE) -C $(FT_PRINTF_DIR) clean
 	@$(MAKE) -C $(GET_NEXT_LINE_DIR) clean
+	@$(MAKE) -C $(MINILIBX_DIR) clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -rf $(TARGET)
+
+re: fclean all
 
 -include $(OBJ_FILES:.o=.d)
 

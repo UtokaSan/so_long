@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:32:21 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/25 16:33:58 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:02:45 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,8 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
+# include "mlx.h"
+
+void	game_init(void);
 
 #endif
