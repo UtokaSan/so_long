@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:26:12 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 12:51:17 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/26 15:54:01 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,3 @@ static	int	check_contains_all_elements(char **map)
 		return (1);
 	return (0);
 }
-
-// Verifie ligne par ligne dans une boucle en méttant un V, si il y a un mur (1)
-// Alors se déplacer pour trouver un 0 (case vide) et aller sur le 0 afin de vérifier si 
-// Celui du bas / haut / gauche / droite contient un E alors return (1)
-// afin de savoir si il y a possibilité d'atteindre la sortie 
