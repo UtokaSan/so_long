@@ -17,7 +17,7 @@ NAME = libgnl.a
 SRC = get_next_line.c get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
 HEADER = ../../include/get_next_line.h
-SIZE = 50
+SIZE = 1024
 
 all: $(NAME)
 

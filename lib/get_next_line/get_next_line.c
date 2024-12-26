@@ -6,13 +6,14 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 01:58:42 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/24 12:03:02 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/25 21:39:23 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "get_next_line.h"
+#include <stdio.h>
 
 static int	find_newline(char *buffer)
 {
@@ -60,9 +61,9 @@ static char	*extract_line(char *buffer)
 
 	newline_index = find_newline(buffer);
 	if (newline_index >= 0)
-		line = ft_substr(buffer, 0, newline_index + 1);
+		line = gnl_substr(buffer, 0, newline_index + 1);
 	else
-		line = ft_strdup(buffer);
+		line = gnl_strdup(buffer);
 	return (line);
 }
 
@@ -77,7 +78,7 @@ static char	*update_buffer(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	new_buffer = ft_strdup(buffer + newline_index + 1);
+	new_buffer = gnl_strdup(buffer + newline_index + 1);
 	free(buffer);
 	return (new_buffer);
 }

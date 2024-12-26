@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 15:08:25 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 11:24:30 by fboulbes         ###   ########.fr       */
+/*   Created: 2024/12/25 18:16:39 by fboulbes          #+#    #+#             */
+/*   Updated: 2024/12/26 11:22:05 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	display_map(void)
+char	**parsing_map(void)
 {
 	char	**map;
-	int		i;
+	int		fd;
+	char	*line;
+	char	**new_map;
 
-	map = parsing_map();
-	if (!map)
-		return (ft_printf("Error\n"), 1);
-	ft_printf("Map parsed!\n");
-	i = 0;
-	while (map[i])
+	map = NULL;
+	fd = open("assets/map/map.ber", O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		ft_printf("%s\n", map[i]);
-		i++;
+		new_map = append_buffer(map, line);
+		free(line);
+		if (!new_map)
+		{
+			free_partial_buffer(map, calculate_buffer_size(map));
+			close(fd);
+			return (NULL);
+		}
+		map = new_map;
+		line = get_next_line(fd);
 	}
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-	return (0);
-}
-
-int	main(void)
-{
-	display_map();
-	return (0);
+	close(fd);
+	return (map);
 }

@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map_checks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 15:08:25 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 11:24:30 by fboulbes         ###   ########.fr       */
+/*   Created: 2024/12/26 11:26:12 by fboulbes          #+#    #+#             */
+/*   Updated: 2024/12/26 11:26:46 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	display_map(void)
+static int	check_map_borders(char **map)
 {
-	char	**map;
-	int		i;
+	int	i;
+	int	j;
 
-	map = parsing_map();
-	if (!map)
-		return (ft_printf("Error\n"), 1);
-	ft_printf("Map parsed!\n");
 	i = 0;
 	while (map[i])
 	{
-		ft_printf("%s\n", map[i]);
+		j = 0;
+		while (map[i][j])
+		{
+			if (i == 0 || i == calculate_buffer_size(map) - 1)
+			{
+				if (map[i][j] != '1')
+					return (1);
+			}
+			if (j == 0 || j == ft_strlen(map[i]) - 1)
+			{
+				if (map[i][j] != '1')
+					return (1);
+			}
+			j++;
+		}
 		i++;
 	}
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-	return (0);
-}
-
-int	main(void)
-{
-	display_map();
 	return (0);
 }

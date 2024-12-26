@@ -6,13 +6,14 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 01:59:25 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/24 12:01:55 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/25 21:38:59 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-size_t	ft_strlen(const char *str)
+size_t	gnl_strlen(const char *str)
 {
 	size_t	i;
 
@@ -27,23 +28,23 @@ char	*insert_buffer(char	*buffer, char *data)
 	char	*temp;
 
 	if (!buffer)
-		temp = ft_strdup(data);
+		temp = gnl_strdup(data);
 	else
 	{
-		temp = ft_strjoin(buffer, data);
+		temp = gnl_strjoin(buffer, data);
 		free(buffer);
 	}
 	return (temp);
 }
 
-char	*ft_substr(const char *str, unsigned int start, size_t len)
+char	*gnl_substr(const char *str, unsigned int start, size_t len)
 {
 	char	*sub;
 	size_t	i;
 
 	if (!str)
 		return (NULL);
-	if (start >= ft_strlen(str))
+	if (start >= gnl_strlen(str))
 	{
 		sub = malloc(1);
 		if (!sub)
@@ -64,14 +65,14 @@ char	*ft_substr(const char *str, unsigned int start, size_t len)
 	return (sub);
 }
 
-char	*ft_strdup(const char *str)
+char	*gnl_strdup(const char *str)
 {
 	char	*dup;
 	size_t	i;
 
 	if (!str)
 		return (NULL);
-	dup = malloc(ft_strlen(str) + 1);
+	dup = malloc(gnl_strlen(str) + 1);
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -84,7 +85,7 @@ char	*ft_strdup(const char *str)
 	return (dup);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*gnl_strjoin(const char *s1, const char *s2)
 {
 	char	*join;
 	size_t	i;
@@ -93,10 +94,10 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strdup(s2));
+		return (gnl_strdup(s2));
 	if (!s2)
-		return (ft_strdup(s1));
-	join = calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+		return (gnl_strdup(s1));
+	join = calloc(gnl_strlen(s1) + gnl_strlen(s2) + 1, sizeof(char));
 	if (!join)
 		return (NULL);
 	i = 0;
