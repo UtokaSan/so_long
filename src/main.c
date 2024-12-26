@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:08:25 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 11:24:30 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/26 18:17:04 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ static int	display_map(void)
 
 int	main(void)
 {
+	char	**map;
+
 	display_map();
+	map = parsing_map();
+	if (check_map(map))
+		printf("Map is valid!\n");
+	else
+		printf("Map is invalid!\n");
 	return (0);
 }

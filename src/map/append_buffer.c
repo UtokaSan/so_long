@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 22:24:01 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 11:21:53 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/26 18:09:46 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int size)
 	return (1);
 }
 
-int	calculate_buffer_size(char **buffer)
+unsigned int	calculate_buffer_size(char **buffer)
 {
-	int	size;
+	unsigned int	size;
 
 	size = 0;
 	while (buffer && buffer[size])

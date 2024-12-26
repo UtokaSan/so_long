@@ -6,13 +6,29 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 15:54:20 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 16:48:39 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/26 19:19:33 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static t_pos	*insert_pos(char **map, t_pos *pos_empty, int *pos_coordinate)
+static void	explore_map(char **map, int x, int y,
+t_map_info *map_info)
+{
+	if (map[x][y] == '1' || map[x][y] == 'V')
+		return ;
+	if (map[x][y] == 'C')
+		map_info->collectibles--;
+	if (map[x][y] == 'E')
+		map_info->exit_found = 1;
+	map[x][y] = 'V';
+	explore_map(map, x - 1, y, map_info);
+	explore_map(map, x + 1, y, map_info);
+	explore_map(map, x, y - 1, map_info);
+	explore_map(map, x, y + 1, map_info);
+}
+
+/* static t_pos	*insert_pos(char **map, t_pos *pos_empty, int *pos_coordinate)
 {
 	int		i;
 	int		j;
@@ -36,13 +52,41 @@ static t_pos	*insert_pos(char **map, t_pos *pos_empty, int *pos_coordinate)
 	}
 	return (pos_empty);
 }
-
-static int	check_exit(char **map, t_pos *pos_empty, int pos_coordinate)
+ */
+static t_pos	find_position(char **map, char target)
 {
+	t_pos	pos;
 	int		i;
 	int		j;
-	int		x;
-	int		y;
+
+	pos.x = -1;
+	pos.y = -1;
+	i = 0;
+	j = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == target)
+			{
+				pos.x = i;
+				pos.y = j;
+				return (pos);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (pos);
+}
+
+/* static int	check_exit(char **map, t_pos *pos_empty, int pos_coordinate)
+{
+	int					i;
+	int					j;
+	unsigned int		x;
+	unsigned int		y;
 
 	i = 0;
 	j = 0;
@@ -58,7 +102,7 @@ static int	check_exit(char **map, t_pos *pos_empty, int pos_coordinate)
 		i++;
 	}
 	return (0);
-}
+} */
 
 int	check_exist_exit(char **map)
 {
