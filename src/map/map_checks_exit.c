@@ -6,53 +6,29 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 15:54:20 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 19:19:33 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/28 22:57:20 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	explore_map(char **map, int x, int y,
-t_map_info *map_info)
+static unsigned int	dfs_explore(char **map, int x, int y,
+unsigned int **visited)
 {
-	if (map[x][y] == '1' || map[x][y] == 'V')
-		return ;
-	if (map[x][y] == 'C')
-		map_info->collectibles--;
-	if (map[x][y] == 'E')
-		map_info->exit_found = 1;
-	map[x][y] = 'V';
-	explore_map(map, x - 1, y, map_info);
-	explore_map(map, x + 1, y, map_info);
-	explore_map(map, x, y - 1, map_info);
-	explore_map(map, x, y + 1, map_info);
+	if ((x < 0 || y < 0 || x >= (int)calculate_buffer_size(map))
+		|| (y >= (int)ft_strlen(map[x]) || visited[x][y] || map[x][y] == WALL))
+		return (FALSE);
+	if (map[x][y] == EXIT)
+		return (TRUE);
+	visited[x][y] = TRUE;
+	if (dfs_explore(map, x + 1, y, visited)
+		|| dfs_explore(map, x - 1, y, visited)
+		|| dfs_explore(map, x, y + 1, visited)
+		|| dfs_explore(map, x, y - 1, visited))
+		return (TRUE);
+	return (FALSE);
 }
 
-/* static t_pos	*insert_pos(char **map, t_pos *pos_empty, int *pos_coordinate)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == '0')
-			{
-				pos_empty[*pos_coordinate].x = i;
-				pos_empty[*pos_coordinate].y = j;
-				(*pos_coordinate)++;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (pos_empty);
-}
- */
 static t_pos	find_position(char **map, char target)
 {
 	t_pos	pos;
@@ -81,46 +57,42 @@ static t_pos	find_position(char **map, char target)
 	return (pos);
 }
 
-/* static int	check_exit(char **map, t_pos *pos_empty, int pos_coordinate)
+static int	check_exit(char **map, unsigned int **visited)
 {
-	int					i;
-	int					j;
-	unsigned int		x;
-	unsigned int		y;
+	t_pos			exit_pos;
 
+	exit_pos = find_position(map, EXIT);
+	if (exit_pos.x == -1 || exit_pos.y == -1)
+		return (FALSE);
+	if (dfs_explore(map, exit_pos.x, exit_pos.y, visited))
+		return (TRUE);
+	return (FALSE);
+}
+
+unsigned int	check_exist_exit(char **map)
+{
+	unsigned int	**visited;
+	int				i;
+	t_pos			pos_player;
+
+	if (!map || !*map)
+		return (FALSE);
+	pos_player = find_position(map, PLAYER);
+	if (pos_player.x == -1 || pos_player.y == -1)
+		return (FALSE);
+	visited = malloc(sizeof(unsigned int *) * calculate_buffer_size(map));
+	if (!visited)
+		return (0);
 	i = 0;
-	j = 0;
-	while (i < pos_coordinate)
+	while (i < (int)calculate_buffer_size(map))
 	{
-		x = pos_empty[i].x;
-		y = pos_empty[i].y;
-		if ((x > 0 && map[x - 1][y] == 'E') ||
-			(x < calculate_buffer_size(map) - 1 && map[x + 1][y] == 'E') ||
-			(y > 0 && map[x][y - 1] == 'E') ||
-			(y < ft_strlen(map[x]) - 1 && map[x][y + 1] == 'E'))
-			return (1);
+		visited[i] = malloc(sizeof(unsigned int) * ft_strlen(map[i]));
+		if (!visited[i])
+			return (free_partial_buffer((char **)visited, i), 0);
+		ft_memset(visited[i], 0, sizeof(unsigned int) * ft_strlen(map[i]));
 		i++;
 	}
-	return (0);
-} */
-
-int	check_exist_exit(char **map)
-{
-	t_pos	*pos_empty;
-	int		len;
-	int		pos_coordinate;
-
-	len = calculate_buffer_size(map) * ft_strlen(map[0]);
-	pos_coordinate = 0;
-	pos_empty = malloc(sizeof(t_pos) * len);
-	if (!pos_empty)
-		return (0);
-	pos_empty = insert_pos(map, pos_empty, &pos_coordinate);
-	if (check_exit(map, pos_empty, pos_coordinate))
-	{
-		free(pos_empty);
-		return (1);
-	}
-	free(pos_empty);
-	return (0);
+	if (check_exit(map, visited))
+		return (free_partial_buffer((char **)visited, i), TRUE);
+	return (free_partial_buffer((char **)visited, i), FALSE);
 }

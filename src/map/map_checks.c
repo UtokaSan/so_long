@@ -6,24 +6,18 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:26:12 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 18:50:22 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/28 22:57:43 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/**
- * Check if wall exist in border
- * Return 1 if doesn't exist and 0 if exist
-**/
 static int	check_map_borders(char **map)
 {
 	unsigned int	i;
 	unsigned int	j;
 
 	i = 0;
-	printf("Map height: %u\n", calculate_buffer_size(map));
-	printf("Map width: %lu\n", ft_strlen(map[0]));
 	while (map[i])
 	{
 		j = 0;
@@ -31,19 +25,14 @@ static int	check_map_borders(char **map)
 		{
 			if (i == 0 || i == calculate_buffer_size(map) - 1)
 			{
-				if (map[i][j] != '1')
-				{
-					printf("Border error: map[%d][%d] = %c (expected '1')\n", i, j, map[i][j]);
+				if (map[i][j] != WALL)
 					return (0);
-				}
 			}
-			if ((j == 0 || map[i][j + 1] == '\n' || map[i][j + 1] == '\0') && map[i][j] != '1')
+			if ((j == 0 || map[i][j + 1] == '\n'
+				|| map[i][j + 1] == '\0') && map[i][j] != '1')
 			{
-				if (map[i][j] != '1')
-				{
-					printf("Border error: map[%d][%d] = %c (expected '1')\n", i, j, map[i][j]);
+				if (map[i][j] != WALL)
 					return (0);
-				}
 			}
 			j++;
 		}
@@ -52,18 +41,25 @@ static int	check_map_borders(char **map)
 	return (1);
 }
 
-static	int	check_rectangular_map(char **map)
+static int	check_rectangular_map(char **map)
 {
 	unsigned int	i;
 	unsigned int	j;
+	size_t			line_length;
 
-	i = 0;
+	if (!map || !map[0])
+		return (0);
+	j = 0;
+	while (map[0][j] && map[0][j] != '\n')
+		j++;
+	line_length = j;
+	i = 1;
 	while (map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (map[i][j] && map[i][j] != '\n')
 			j++;
-		if (i > 0 && j != ft_strlen(map[i - 1]))
+		if (j != line_length)
 			return (0);
 		i++;
 	}
@@ -85,44 +81,29 @@ static	int	check_contains_all_elements(char **map)
 	while (map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (map[i][j++])
 		{
-			if (map[i][j] == 'P')
+			if (map[i][j] == PLAYER)
 				begin++;
-			else if (map[i][j] == 'C')
+			else if (map[i][j] == COLLECTIBLE)
 				item++;
-			else if (map[i][j] == 'E')
+			else if (map[i][j] == EXIT)
 				exit++;
-			j++;
 		}
 		i++;
 	}
-	if (exit == 1 && item > 0 && begin > 0)
-		return (1);
-	return (0);
+	return (exit == 1 && item > 0 && begin > 0);
 }
 
 int	check_map(char **map)
 {
 	if (!check_map_borders(map))
-	{
-		printf("Map border is invalid!\n");
-		return (0);
-	}
+		return (printf("Map border is invalid!\n"), 0);
 	if (!check_rectangular_map(map))
-	{
-		printf("Map is not rectangular!\n");
-		return (0);
-	}
+		return (printf("Map is not rectangular!\n"), 0);
 	if (!check_contains_all_elements(map))
-	{
-		printf("Map doesn't contain all elements!\n");
-		return (0);
-	}
+		return (printf("Map doesn't contain all elements!\n"), 0);
 	if (!check_exist_exit(map))
-	{
-		printf("Map doesn't contain possible exit!\n");
-		return (0);
-	}
+		return (printf("Map doesn't contain possible exit!\n"), 0);
 	return (1);
 }
