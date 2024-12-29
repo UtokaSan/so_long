@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:08:25 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/26 18:17:04 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/29 03:41:35 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int	main(void)
 		printf("Map is valid!\n");
 	else
 		printf("Map is invalid!\n");
+	game_init();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:32:21 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/28 22:56:51 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/29 03:57:00 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 # include "mlx.h"
 # include "fcntl.h"
 
-void						game_init(void);
+int							game_init(void);
 char						**parsing_map(void);
 char						**append_buffer(char **buffer, char *data);
 void						free_partial_buffer(char **buffer, int size);
 unsigned int				calculate_buffer_size(char **buffer);
 unsigned int				check_exist_exit(char **map);
 int							check_map(char **map);
+int							handle_close(int keycode, void *param);
 
 typedef struct s_pos
 {

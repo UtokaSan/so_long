@@ -13,7 +13,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Iinclude -g -Ilib/minilibx-linux
 LDFLAGS = -Llib/libft -Llib/ft_printf -Llib/get_next_line -Llib/minilibx-linux
-LDLIBS = -lft -lftprintf -lgnl -lmlx -lX11 -lXext
+LDLIBS = -lft -lftprintf -lgnl -lmlx -lXext -lX11 -lm
 
 SRC_DIR = src
 OBJ_DIR = obj
