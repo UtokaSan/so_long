@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:32:21 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/29 19:23:47 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/30 00:52:18 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ unsigned int				check_exist_exit(char **map);
 int							check_map(char **map);
 int							handle_close(int keycode, void *param);
 int							draw_wall(t_game game, char **map);
+int							draw_collectibles(t_game game, char **map);
+int							draw_player(t_game game, char **map);
+int							draw_exit(t_game game, char **map);
 
 # define TRUE 1
 # define FALSE 0
@@ -62,5 +65,8 @@ int							draw_wall(t_game game, char **map);
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+
+# define WINDOW_WIDTH 1220
+# define WINDOW_HEIGHT 790
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 15:54:20 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/28 22:57:20 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:34:42 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ static t_pos	find_position(char **map, char target)
 
 static int	check_exit(char **map, unsigned int **visited)
 {
-	t_pos			exit_pos;
+	t_pos			pos_player;
 
-	exit_pos = find_position(map, EXIT);
-	if (exit_pos.x == -1 || exit_pos.y == -1)
+	pos_player = find_position(map, PLAYER);
+	if (pos_player.x == -1 || pos_player.y == -1)
 		return (FALSE);
-	if (dfs_explore(map, exit_pos.x, exit_pos.y, visited))
+	if (dfs_explore(map, pos_player.x, pos_player.y, visited))
 		return (TRUE);
 	return (FALSE);
 }

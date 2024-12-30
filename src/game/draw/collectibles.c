@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall.c                                             :+:      :+:    :+:   */
+/*   collectibles.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 19:10:23 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/30 00:19:01 by fboulbes         ###   ########.fr       */
+/*   Created: 2024/12/30 00:24:52 by fboulbes          #+#    #+#             */
+/*   Updated: 2024/12/30 00:34:44 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	draw_wall(t_game game, char **map)
+int	draw_collectibles(t_game game, char **map)
 {
 	t_img_game		img_game;
 	unsigned int	y;
@@ -22,7 +22,7 @@ int	draw_wall(t_game game, char **map)
 	img_game.height = 32;
 	img_game.img = mlx_xpm_file_to_image(
 			game.mlx,
-			"assets/textures/brick_gray0.xpm",
+			"assets/textures/zot_pillar.xpm",
 			&img_game.width, &img_game.height);
 	if (!img_game.img)
 		return (mlx_destroy_window(game.mlx, game.mlx_win), 1);
@@ -32,7 +32,7 @@ int	draw_wall(t_game game, char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == WALL && map[y][x] != PLAYER && map[y][x] != EXIT)
+			if (map[y][x] == COLLECTIBLE)
 				mlx_put_image_to_window(game.mlx, game.mlx_win,
 					img_game.img, x * 32, y * 32);
 			x++;
