@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:32:21 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/30 00:52:18 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/31 04:30:56 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include "mlx.h"
 # include "fcntl.h"
 
-typedef struct s_game
+typedef struct s_pos
 {
-	void	*mlx;
-	void	*mlx_win;
-}	t_game;
+	int	x;
+	int	y;
+}	t_pos;
 
 typedef struct img_game
 {
@@ -32,13 +32,20 @@ typedef struct img_game
 	int		height;
 }	t_img_game;
 
-typedef struct s_pos
+typedef struct s_game
 {
-	int	x;
-	int	y;
-}	t_pos;
+	void		*mlx;
+	void		*mlx_win;
+	char		**map;
+	t_pos		player;
+	t_img_game	floor_img;
+	t_img_game	collectible_img;
+	t_img_game	exit_img;
+	t_img_game	player_img;
+	t_img_game	wall_img;
+}	t_game;
 
-int							game_init(void);
+int							game_init(t_game *game);
 char						**parsing_map(void);
 char						**append_buffer(char **buffer, char *data);
 void						free_partial_buffer(char **buffer, int size);
@@ -46,10 +53,11 @@ unsigned int				calculate_buffer_size(char **buffer);
 unsigned int				check_exist_exit(char **map);
 int							check_map(char **map);
 int							handle_close(int keycode, void *param);
-int							draw_wall(t_game game, char **map);
-int							draw_collectibles(t_game game, char **map);
-int							draw_player(t_game game, char **map);
-int							draw_exit(t_game game, char **map);
+int							draw(t_game game, char **map);
+t_pos						find_position(char **map, char target);
+int							detect_key_move(int keycode, void *param);
+int							draw_floor(t_game game, char **map);
+int							load_images(t_game *game);
 
 # define TRUE 1
 # define FALSE 0

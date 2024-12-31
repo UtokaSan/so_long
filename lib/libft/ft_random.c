@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_random.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 15:08:25 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/31 04:25:13 by fboulbes         ###   ########.fr       */
+/*   Created: 2024/12/30 04:04:33 by fboulbes          #+#    #+#             */
+/*   Updated: 2024/12/31 04:20:11 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-int	main(void)
+// Algorithm LCG (Linear Congruential Generator)
+unsigned int	ft_random(unsigned int seed, unsigned int min,
+unsigned int max)
 {
-	t_game	game;
+	unsigned int	sd;
 
-	if (!game_init(&game))
-		return (ft_printf("Error: game_init() failed\n"), 1);
-	mlx_key_hook(game.mlx_win, detect_key_move, &game);
-	mlx_hook(game.mlx_win, 2, 1L << 0, handle_close, &game);
-	draw(game, game.map);
-	mlx_loop(game.mlx);
-	return (0);
+	sd = (1664525 * seed + 1013904223) % 4294967296;
+	return (min + (sd % (max - min)));
 }

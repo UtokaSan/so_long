@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 15:54:20 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/29 23:34:42 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/31 03:33:33 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ unsigned int **visited)
 	return (FALSE);
 }
 
-static t_pos	find_position(char **map, char target)
+t_pos	find_position(char **map, char target)
 {
 	t_pos	pos;
 	int		i;
@@ -46,8 +46,8 @@ static t_pos	find_position(char **map, char target)
 		{
 			if (map[i][j] == target)
 			{
-				pos.x = i;
-				pos.y = j;
+				pos.x = j;
+				pos.y = i;
 				return (pos);
 			}
 			j++;

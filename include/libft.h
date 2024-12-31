@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 19:00:58 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/11/19 15:02:39 by fboulbes         ###   ########.fr       */
+/*   Updated: 2024/12/30 04:13:30 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+unsigned int	ft_random(unsigned int seed, unsigned int min,
+					unsigned int max);
 
 typedef struct s_list
 {
