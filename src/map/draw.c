@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 00:41:45 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/31 04:48:59 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/01/04 22:44:33 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,25 @@ int	load_images(t_game *game)
 	return (0);
 }
 
+void	draw_tile(t_game game, char **map, int x, int y)
+{
+	if (map[y][x] == FLOOR)
+		mlx_put_image_to_window(game.mlx, game.mlx_win,
+			game.floor_img.img, x * 32, y * 32);
+	if (map[y][x] == WALL)
+		mlx_put_image_to_window(game.mlx, game.mlx_win,
+			game.wall_img.img, x * 32, y * 32);
+	else if (map[y][x] == COLLECTIBLE)
+		mlx_put_image_to_window(game.mlx, game.mlx_win,
+			game.collectible_img.img, x * 32, y * 32);
+	else if (map[y][x] == EXIT)
+		mlx_put_image_to_window(game.mlx, game.mlx_win,
+			game.exit_img.img, x * 32, y * 32);
+	else if (map[y][x] == PLAYER)
+		mlx_put_image_to_window(game.mlx, game.mlx_win,
+			game.player_img.img, x * 32, y * 32);
+}
+
 // Draw different floor with % 2 
 int	draw(t_game game, char **map)
 {
@@ -53,21 +72,7 @@ int	draw(t_game game, char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == FLOOR)
-				mlx_put_image_to_window(game.mlx, game.mlx_win,
-					game.floor_img.img, x * 32, y * 32);
-			if (map[y][x] == WALL)
-				mlx_put_image_to_window(game.mlx, game.mlx_win,
-					game.wall_img.img, x * 32, y * 32);
-			else if (map[y][x] == COLLECTIBLE)
-				mlx_put_image_to_window(game.mlx, game.mlx_win,
-					game.collectible_img.img, x * 32, y * 32);
-			else if (map[y][x] == EXIT)
-				mlx_put_image_to_window(game.mlx, game.mlx_win,
-					game.exit_img.img, x * 32, y * 32);
-			else if (map[y][x] == PLAYER)
-				mlx_put_image_to_window(game.mlx, game.mlx_win,
-					game.player_img.img, x * 32, y * 32);
+			draw_tile(game, map, x, y);
 			x++;
 		}
 		y++;
