@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:32:21 by fboulbes          #+#    #+#             */
-/*   Updated: 2024/12/31 04:30:56 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:40:15 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct s_game
 	t_img_game	wall_img;
 }	t_game;
 
-int							game_init(t_game *game);
-char						**parsing_map(void);
+int							game_init(t_game *game, char *my_map);
+char						**parsing_map(char *my_map);
 char						**append_buffer(char **buffer, char *data);
 void						free_partial_buffer(char **buffer, int size);
 unsigned int				calculate_buffer_size(char **buffer);
@@ -58,6 +58,7 @@ t_pos						find_position(char **map, char target);
 int							detect_key_move(int keycode, void *param);
 int							draw_floor(t_game game, char **map);
 int							load_images(t_game *game);
+int							handle_close_button(void *param);
 
 # define TRUE 1
 # define FALSE 0

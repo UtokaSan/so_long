@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:52:07 by fboulbes          #+#    #+#             */
-/*   Updated: 2025/01/04 23:07:02 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:42:13 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static void	free_game(t_game *game)
 	free(game->mlx);
 }
 
-int	game_init(t_game *game)
+// free image
+// donner map dans arg
+
+int	game_init(t_game *game, char *my_map)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
@@ -31,7 +34,7 @@ int	game_init(t_game *game)
 		free_game(game);
 		return (ft_printf("Error: mlx_new_window() failed\n"), 0);
 	}
-	game->map = parsing_map();
+	game->map = parsing_map(my_map);
 	if (!check_map(game->map))
 	{
 		free_game(game);

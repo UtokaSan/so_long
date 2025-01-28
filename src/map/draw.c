@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 00:41:45 by fboulbes          #+#    #+#             */
-/*   Updated: 2025/01/04 22:44:33 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:26:47 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	load_images(t_game *game)
 void	draw_tile(t_game game, char **map, int x, int y)
 {
 	if (map[y][x] == FLOOR)
+	{
 		mlx_put_image_to_window(game.mlx, game.mlx_win,
 			game.floor_img.img, x * 32, y * 32);
+	}
 	if (map[y][x] == WALL)
 		mlx_put_image_to_window(game.mlx, game.mlx_win,
 			game.wall_img.img, x * 32, y * 32);
