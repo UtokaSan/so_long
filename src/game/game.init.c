@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:52:07 by fboulbes          #+#    #+#             */
-/*   Updated: 2025/01/28 13:42:13 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:11:14 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	free_game(t_game *game)
 }
 
 // free image
-// donner map dans arg
 
 int	game_init(t_game *game, char *my_map)
 {

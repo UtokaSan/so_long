@@ -53,6 +53,9 @@ clean:
 	@$(MAKE) -C $(MINILIBX_DIR) clean
 	rm -rf $(OBJ_DIR)
 
+val:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./so_long map.ber
+
 fclean: clean
 	rm -rf $(TARGET)
 
