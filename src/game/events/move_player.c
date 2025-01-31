@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 00:56:27 by fboulbes          #+#    #+#             */
-/*   Updated: 2025/01/30 11:37:27 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:16:07 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,23 @@ int	move_player(t_pos *new_pos, int *keycode)
 	return (1);
 }
 
+void	display_counter(t_game *game, int counter)
+{
+	char	*str;
+	int		ttl_len;
+
+	ttl_len = ft_strlen("Moves: ") + ft_strlen(ft_itoa(counter));
+	str = malloc(ttl_len + 1);
+	if (!str)
+		return ;
+	str[0] = '\0';
+	ft_strcat(str, "Moves: ");
+	ft_strcat(str, ft_itoa(counter));
+	mlx_string_put(game->mlx, game->mlx_win, 32, 32, 0xFFFFFF,
+		str);
+	free(str);
+}
+
 int	detect_key_move(int keycode, void *param)
 {
 	t_game		*game;
@@ -93,5 +110,6 @@ int	detect_key_move(int keycode, void *param)
 		else
 			printf("Player not moved!\n");
 	}
+	display_counter(game, count);
 	return (0);
 }

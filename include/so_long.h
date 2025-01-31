@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:32:21 by fboulbes          #+#    #+#             */
-/*   Updated: 2025/01/28 13:40:15 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:24:13 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_game
 	char		**map;
 	t_pos		player;
 	t_img_game	floor_img;
+	t_img_game	grass_img;
 	t_img_game	collectible_img;
 	t_img_game	exit_img;
 	t_img_game	player_img;
