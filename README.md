@@ -34,8 +34,10 @@ Once compiled, you can run the game with:
 so_long/
 ├── src/            # Source files
 ├── include/        # Header files
+├── lib/			# libraries
 ├── assets/
 │   └── map/        # Map files (.ber)
+│	└── textures/	# Textures of game
 ├── Makefile
 └── README.md
 ```
