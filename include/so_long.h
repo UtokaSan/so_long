@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:32:21 by fboulbes          #+#    #+#             */
-/*   Updated: 2025/02/01 21:24:48 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:52:04 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "get_next_line.h"
 # include "mlx.h"
 # include "fcntl.h"
+
+/* -------- Structures -------- */
 
 typedef struct s_pos
 {
@@ -45,6 +47,8 @@ typedef struct s_game
 	t_img_game	wall_img;
 }	t_game;
 
+/* -------- Functions -------- */
+
 int							game_init(t_game *game, char *my_map);
 char						**parsing_map(char *my_map);
 char						**append_buffer(char **buffer, char *data);
@@ -60,6 +64,7 @@ int							draw_floor(t_game game, char **map);
 int							load_images(t_game *game);
 int							handle_close_button(void *param);
 
+/* -------- Constants -------- */
 # define TRUE 1
 # define FALSE 0
 
