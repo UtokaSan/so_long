@@ -6,7 +6,7 @@
 /*   By: fboulbes <fboulbes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 00:41:45 by fboulbes          #+#    #+#             */
-/*   Updated: 2025/01/31 19:29:42 by fboulbes         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:28:51 by fboulbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,12 @@ int	load_img(t_img_game *img_game, char *path, void *mlx)
 			mlx,
 			path,
 			&img_game->width, &img_game->height);
-	if (!img_game->img)
-	{
-		ft_printf("error xpm don't load : %s", path);
-		return (1);
-	}
 	return (0);
 }
 
 int	load_images(t_game *game)
 {
 	if (load_img(&game->floor_img, "assets/textures/floor.xpm", game->mlx))
-		return (1);
-	if (load_img(&game->grass_img, "assets/textures/grass.xpm", game->mlx))
 		return (1);
 	if (load_img(&game->collectible_img, "assets/textures/collectible.xpm",
 			game->mlx))
@@ -49,14 +42,8 @@ int	load_images(t_game *game)
 void	draw_tile(t_game game, char **map, int x, int y)
 {
 	if (map[y][x] == FLOOR)
-	{
-		if ((x % 2 == 0 && y % 2 == 0) || (x % 2 == 1 && y % 2 == 1))
-			mlx_put_image_to_window(game.mlx, game.mlx_win,
-				game.floor_img.img, x * 32, y * 32);
-		else
-			mlx_put_image_to_window(game.mlx, game.mlx_win,
-				game.grass_img.img, x * 32, y * 32);
-	}
+		mlx_put_image_to_window(game.mlx, game.mlx_win,
+			game.floor_img.img, x * 32, y * 32);
 	if (map[y][x] == WALL)
 		mlx_put_image_to_window(game.mlx, game.mlx_win,
 			game.wall_img.img, x * 32, y * 32);
